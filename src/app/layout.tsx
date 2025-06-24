@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "./_components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
+import TopBar from "./_components/topbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,13 +30,37 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider  attribute="class" 
-                        defaultTheme="system" 
-                        enableSystem
-                        disableTransitionOnChange>
-          <NavBar />
-          {children}
-        </ThemeProvider>
+                {/* Custom textured background */}
+        <div className="fixed inset-0 z-0">
+          {/* Gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800" />
+          
+          {/* Large typography texture */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-0 left-0 text-white/5 font-black text-[20rem] leading-none select-none pointer-events-none transform -translate-x-10 -translate-y-10">
+              FULLSTACK
+            </div>
+            <div className="absolute bottom-0 right-0 text-white/5 font-black text-[20rem] leading-none select-none pointer-events-none transform translate-x-10 translate-y-10">
+              DEVELOPER
+            </div>
+          </div>
+          
+          {/* Dot pattern overlay */}
+          <div className="absolute inset-0 opacity-20" style={{
+            backgroundImage: `radial-gradient(circle, white 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }} />
+        </div>
+        <div className="z-10 relative">
+          <ThemeProvider  attribute="class" 
+                          defaultTheme="system" 
+                          enableSystem
+                          disableTransitionOnChange>
+            <TopBar />
+            {/* <NavBar /> */}
+            {children}
+          </ThemeProvider>
+        </div>
       </body>
     </html>
   );
