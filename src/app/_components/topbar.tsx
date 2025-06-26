@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 
-const TopBar = () => {
+export default function TopBar() {
+  
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [shadowStyle, setShadowStyle] = useState({ width: 0, left: 0 });
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
@@ -59,5 +60,3 @@ const TopBar = () => {
     </nav>
   );
 };
-
-export default TopBar;
